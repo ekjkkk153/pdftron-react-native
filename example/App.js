@@ -18,28 +18,24 @@ export default class App extends Component<Props> {
     super(props);
   }
 
-  onLeadingNavButtonPressed = () => {
+  onLeadingNavButtonPressed = async () => {
     console.log('leading nav button pressed');
-    if (this._viewer) {
-      this._viewer.setStampImageData().then((annotationId, pageNumber, stampImageDataUrl) => {
-        annotationID = '75911d3a-f1fa-7a4f-8137-5885e3a4c4ae',
-        pageNumber = 1,
-        stampImageData = 'https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png';
-      });
-    }
+    // if (this._viewer) {
+    //   this._viewer.setStampImageData().then((annotationId, pageNumber, stampImageDataUrl) => {
+    //     annotationID = '75911d3a-f1fa-7a4f-8137-5885e3a4c4ae',
+    //     pageNumber = 1,
+    //     stampImageData = 'https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png';
+    //   });
+    // }
 
-    if (Platform.OS === 'ios') {
+    //if (Platform.OS === 'ios') {
       Alert.alert(
         'App',
-        'onLeadingNavButtonPressed',
-        [
-          {text: 'OK', onPress: () => console.log('OK Pressed')},
-        ],
-        { cancelable: true }
+        (await this._viewer.exportAnnotations())
       )
-    } else {
-      BackHandler.exitApp();
-    }
+    //} else {
+    //  BackHandler.exitApp();
+    //}
   }
 
   onDocumentLoaded = () => {
